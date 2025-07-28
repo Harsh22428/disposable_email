@@ -32,15 +32,22 @@ def save_email(db, email_dict):
     return str(result.inserted_id)
     
 
-def get_emails_by_inbox(db,inbox_name):
-    return list(db.emails.find({"inbox": inbox_name}).sort("date", -1))
+def get_emails_by_inbox(db, inbox_name):
+    emails = list(db.emails.find({"inbox": inbox_name}).sort("date", -1))
+    for e in emails:
+        e["_id"] = str(e["_id"])
+    return emails
 
 def get_email_by_id(db, email_id):
     try:
         obj_id = ObjectId(email_id)
     except Exception:
         return None  # Invalid id format
-    return db.emails.find_one({"_id": obj_id})   
+    email = db.emails.find_one({"_id": obj_id})
+    if email:
+        email["_id"] = str(email["_id"])
+    return email
+  
 
 def delete_email_by_id(db, email_id):
     try:

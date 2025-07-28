@@ -2,8 +2,8 @@
 from email.parser import BytesParser
 from email import policy
 
-from api.models import EmailModel
-from api.db import connect_to_mongo, save_email
+from ..api.models import EmailModel
+from ..api.db import connect_to_mongo, save_email
 import logging
 logger = logging.getLogger("smtp_handler")
 logging.basicConfig(level=logging.INFO)

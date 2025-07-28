@@ -1,6 +1,6 @@
 # Responsible for starting SMTP server
 from aiosmtpd.controller import Controller
-from handler import DBHandler
+from .handler import DBHandler
 from config import settings
 if __name__ == '__main__':
     handler = DBHandler()
