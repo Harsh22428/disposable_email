@@ -1,6 +1,4 @@
-# smtp_server/handler.py
-
-from aiosmtpd.controller import Controller
+# handles incoming emails --> Parse them -->Build email models and saves them to MongoDB
 from email.parser import BytesParser
 from email import policy
 
@@ -25,7 +23,7 @@ class DBHandler:
             subject = msg['subject']
             date = msg['date']
 
-            # Parse the body (prefer plain, then HTML)
+            # Parse the body 
             if msg.is_multipart():
                 body = None
                 for part in msg.walk():
@@ -79,7 +77,4 @@ class DBHandler:
             print(f"Error processing email: {e}")
             return '451 Requested action aborted: local error in processing'
 
-if __name__ == '__main__':
-    handler = DBHandler()
-    controller = Controller(handler, hostname='0.0.0.0', port=25)
-    controller.start()
+
