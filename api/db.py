@@ -15,7 +15,11 @@ def connect_to_mongo():
 
 def get_database():
     client = connect_to_mongo()
-    return client[os.getenv("MONGO_DBNAME", "disposble_email")]
+    db= client[os.getenv("MONGO_DBNAME", "disposble_email")]
+    #  TTL index exists for auto-deleting old emails (7 days)
+    db.emails.create_index("date", expireAfterSeconds=604800)
+    return db
+
 
 def close_db_connection():
     global client

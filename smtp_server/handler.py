@@ -4,7 +4,9 @@ from email import policy
 
 from api.models import EmailModel
 from api.db import connect_to_mongo, save_email
-
+import logging
+logger = logging.getLogger("smtp_handler")
+logging.basicConfig(level=logging.INFO)
 
 db = connect_to_mongo()
 
@@ -74,7 +76,7 @@ class DBHandler:
 
             return '250 Message accepted for delivery'
         except Exception as e:
-            print(f"Error processing email: {e}")
-            return '451 Requested action aborted: local error in processing'
+                logger.error(f"Error processing email: {e}", exc_info=True)
+                return '451 Requested action aborted: local error in processing'
 
 
