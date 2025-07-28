@@ -18,7 +18,7 @@ app = FastAPI()
 # Middleware to handle CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=["https://arp1it.club"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
