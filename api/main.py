@@ -4,8 +4,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 
-from models import EmailModel
-from db import (
+from .models import EmailModel
+from .db import (
     get_emails_by_inbox,
     get_email_by_id,
     delete_email_by_id,
